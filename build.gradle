@@ -111,11 +111,11 @@ uploadArchives {
                 name 'Queues Manager'
                 packaging 'jar'
                 description 'Convenience class for facilitating some common tasks with broker.'
-                url 'https://github.com/marcelop3251/queues'
+                url 'https://github.com/marcelop3251/queues-manager'
 
                 scm {
-                    connection 'scm:git:git://github.com/marcelop3251/queues.git'
-                    developerConnection 'scm:git:ssh://github.com/marcelop3251/queues.git'
+                    connection 'scm:git:git://github.com/marcelop3251/queues-manager.git'
+                    developerConnection 'scm:git:ssh://github.com/marcelop3251/queues-manager.git'
                     url 'http://github.com/marcelop3251/queues/tree/master'
                 }
 
