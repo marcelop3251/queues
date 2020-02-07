@@ -48,7 +48,7 @@ Environment variables that should be available
 ## Gradle
 
 ```
-implementation 'com.github.marcelop3251:queues-manager:1.0.0'
+implementation 'com.github.marcelop3251:queues-manager:1.0.2'
 ```
 
 ## Maven
@@ -57,7 +57,7 @@ implementation 'com.github.marcelop3251:queues-manager:1.0.0'
 <dependency>
   <groupId>com.github.marcelop3251</groupId>
   <artifactId>queues-manager</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
