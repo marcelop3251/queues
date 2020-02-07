@@ -99,7 +99,7 @@ uploadArchives {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
             // Destination
-            repository(url: "https://oss.sonatype.org/com.github.marcelop3251.queuesmanager.service/local/staging/deploy/maven2/") {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
             snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
@@ -116,7 +116,7 @@ uploadArchives {
                 scm {
                     connection 'scm:git:git://github.com/marcelop3251/queues-manager.git'
                     developerConnection 'scm:git:ssh://github.com/marcelop3251/queues-manager.git'
-                    url 'http://github.com/marcelop3251/queues/tree/master'
+                    url 'http://github.com/marcelop3251/queues-manager/'
                 }
 
                 licenses {
