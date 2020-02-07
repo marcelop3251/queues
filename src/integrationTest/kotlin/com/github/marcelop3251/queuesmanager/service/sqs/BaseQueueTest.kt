@@ -1,4 +1,4 @@
-package service.sqs
+package com.github.marcelop3251.queuesmanager.service.sqs
 
 import java.util.*
 

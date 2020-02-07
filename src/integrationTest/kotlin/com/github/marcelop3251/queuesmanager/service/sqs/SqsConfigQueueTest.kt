@@ -1,11 +1,11 @@
-package service.sqs
+package com.github.marcelop3251.queuesmanager.service.sqs
 
 
 import com.amazon.sqs.javamessaging.message.SQSTextMessage
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
 import com.natpryce.konfig.ConfigurationMap
-import config.EnvironmentConfig
+import com.github.marcelop3251.queuesmanager.config.EnvironmentConfig
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -14,7 +14,7 @@ import org.testcontainers.containers.localstack.LocalStackContainer
 import org.testcontainers.containers.localstack.LocalStackContainer.Service.SQS
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import service.impl.SqsConfigQueue
+import com.github.marcelop3251.queuesmanager.service.impl.SqsConfigQueue
 
 const val QUEUE_NAME = "queue"
 

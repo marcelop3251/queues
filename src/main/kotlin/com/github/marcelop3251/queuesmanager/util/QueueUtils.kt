@@ -1,4 +1,4 @@
-package util
+package com.github.marcelop3251.queuesmanager.util
 
 import javax.jms.Connection
 import javax.jms.ConnectionFactory

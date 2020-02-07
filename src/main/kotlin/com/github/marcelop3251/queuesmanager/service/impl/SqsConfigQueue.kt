@@ -1,4 +1,4 @@
-package service.impl
+package com.github.marcelop3251.queuesmanager.service.impl
 
 import com.amazon.sqs.javamessaging.ProviderConfiguration
 import com.amazon.sqs.javamessaging.SQSConnectionFactory
@@ -9,11 +9,11 @@ import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
 import com.amazonaws.services.sqs.model.CreateQueueRequest
 import com.amazonaws.services.sqs.model.CreateQueueResult
-import config.EnvironmentConfig
-import service.ConfigQueue
-import util.QueueUtils.createConnection
-import util.QueueUtils.createDestination
-import util.QueueUtils.createSession
+import com.github.marcelop3251.queuesmanager.config.EnvironmentConfig
+import com.github.marcelop3251.queuesmanager.service.ConfigQueue
+import com.github.marcelop3251.queuesmanager.util.QueueUtils.createConnection
+import com.github.marcelop3251.queuesmanager.util.QueueUtils.createDestination
+import com.github.marcelop3251.queuesmanager.util.QueueUtils.createSession
 import javax.jms.ConnectionFactory
 import javax.jms.MessageConsumer
 import javax.jms.MessageProducer

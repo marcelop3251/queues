@@ -1,4 +1,4 @@
-package service
+package com.github.marcelop3251.queuesmanager.service
 
 import com.amazonaws.services.sqs.model.CreateQueueResult
 import javax.jms.MessageConsumer
