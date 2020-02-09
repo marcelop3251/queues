@@ -5,23 +5,63 @@ plugins {
 
 group 'com.github.marcelop3251'
 archivesBaseName = "queues-manager"
-version '1.0-SNAPSHOT'
+version '1.2.0'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
+
+sourceSets {
+    integrationTest{
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+        resources.srcDir file('src/integrationTest/resources')
+    }
+}
+
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+}
+
+task integrationTest(type: Test) {
+    description = 'executando integration test'
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+test {
+    testLogging.showStandardStreams = true
+    useJUnitPlatform()
+}
+
+check.dependsOn integrationTest
+
+integrationTest.mustRunAfter test
 
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation(
+            'org.jetbrains.kotlin:kotlin-stdlib-jdk8',
+            'com.amazonaws:aws-java-sdk-sqs:1.11.697',
+            'com.amazonaws:amazon-sqs-java-messaging-lib:1.0.8',
+            'ch.qos.logback:logback-classic:1.2.3',
+            'com.natpryce:konfig:1.6.10.0',
+            'com.rabbitmq.jms:rabbitmq-jms:1.14.0'
+    )
     
-    implementation 'com.amazonaws:aws-java-sdk-sqs:1.11.697'
-
-    implementation 'com.amazonaws:amazon-sqs-java-messaging-lib:1.0.8'
-    
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation ('org.junit.jupiter:junit-jupiter:5.4.2',
+            'org.assertj:assertj-core:3.11.1',
+            'io.mockk:mockk:1.9',
+            "org.testcontainers:junit-jupiter:1.12.5",
+            "org.testcontainers:localstack:1.12.5",
+            "org.testcontainers:rabbitmq:1.12.5"
+    )
 }
 
 // Signing
@@ -73,12 +113,12 @@ uploadArchives {
                 name 'Queues Manager'
                 packaging 'jar'
                 description 'Convenience class for facilitating some common tasks with broker.'
-                url 'https://github.com/marcelop3251/queues'
+                url 'https://github.com/marcelop3251/queues-manager'
 
                 scm {
-                    connection 'scm:git:git://github.com/marcelop3251/queues.git'
-                    developerConnection 'scm:git:ssh://github.com/marcelop3251/queues.git'
-                    url 'http://github.com/marcelop3251/queues/tree/master'
+                    connection 'scm:git:git://github.com/marcelop3251/queues-manager.git'
+                    developerConnection 'scm:git:ssh://github.com/marcelop3251/queues-manager.git'
+                    url 'http://github.com/marcelop3251/queues-manager/'
                 }
 
                 licenses {
