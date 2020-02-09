@@ -1,29 +1,29 @@
 package com.github.marcelop3251.queuesmanager.service
 
-import com.amazonaws.services.sqs.model.CreateQueueResult
+import javax.jms.ConnectionFactory
 import javax.jms.MessageConsumer
 import javax.jms.MessageProducer
 
 interface ConfigQueue {
 
-    /**
-     * The name of queue that will be created
-     */
-    fun createQueue(nameQueue: String): CreateQueueResult
 
     /**
-     * The name of queue that will be created with the attritutes
-     */
-    fun createQueue(nameQueue: String, attributes: Map<String, String>): CreateQueueResult
-
-    /**
-     * The name of queue that will be listening
+     * Create a MessageConsumer from name of queue
+     * @param nameQueue
+     * @return MessageConsumer
      */
     fun createConsumer(nameQueue: String): MessageConsumer
 
-
     /**
-     *  The name of queue that will be send message
+     *  Create a MessageProducer from name of queue
+     *  @param nameQueue
+     *  @Return MessageProducer
      */
     fun createProducer(nameQueue: String): MessageProducer
+
+    /**
+     * Return a connection factory for config advanced
+     * @return ConnectionFactory
+     */
+    fun getConnectionFactory(): ConnectionFactory
 }

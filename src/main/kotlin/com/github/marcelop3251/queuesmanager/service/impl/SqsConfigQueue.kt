@@ -7,54 +7,32 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
-import com.amazonaws.services.sqs.model.CreateQueueRequest
-import com.amazonaws.services.sqs.model.CreateQueueResult
-import com.github.marcelop3251.queuesmanager.config.EnvironmentConfig
+import com.github.marcelop3251.queuesmanager.config.EnvironmentConfigSqs
 import com.github.marcelop3251.queuesmanager.service.ConfigQueue
-import com.github.marcelop3251.queuesmanager.util.QueueUtils.createConnection
-import com.github.marcelop3251.queuesmanager.util.QueueUtils.createDestination
-import com.github.marcelop3251.queuesmanager.util.QueueUtils.createSession
+import org.slf4j.LoggerFactory
 import javax.jms.ConnectionFactory
 import javax.jms.MessageConsumer
 import javax.jms.MessageProducer
 
 
 class SqsConfigQueue(
-    private val environment: EnvironmentConfig = EnvironmentConfig()
-) : ConfigQueue {
+    private val environment: EnvironmentConfigSqs = EnvironmentConfigSqs()
+) : BaseConfigQueue(), ConfigQueue {
 
-    override fun createQueue(nameQueue: String): CreateQueueResult =
-        amazonSQSBuilder().let {
-            it.createQueue(CreateQueueRequest(nameQueue).addAttributesEntry("DelaySeconds","20"))
-        }
-
-    override fun createQueue(nameQueue: String, attributes: Map<String, String>): CreateQueueResult =
-        amazonSQSBuilder().let {
-            val createQueueRequest = CreateQueueRequest(nameQueue).withAttributes(attributes)
-            it.createQueue(createQueueRequest)
-        }
-
+    private val factory = amazonSqsFactory()
 
     override fun createConsumer(nameQueue: String): MessageConsumer =
-        createConnection(sqsConnectionFactory()).let {
-            it.start()
-            val session = createSession(it)
-            session.createConsumer(createDestination(session, nameQueue))
-        }
-
+        createConsumer(factory, nameQueue)
 
     override fun createProducer(nameQueue: String): MessageProducer =
-        createConnection(sqsConnectionFactory()).let {
-            val session = createSession(it)
-            session.createProducer(createDestination(session,nameQueue))
-        }
+        createProducer(factory, nameQueue)
 
-    private fun sqsConnectionFactory(): ConnectionFactory {
-        return SQSConnectionFactory(
-            ProviderConfiguration(),
-            amazonSQSBuilder()
-        )
-    }
+    override fun getConnectionFactory(): ConnectionFactory = factory
+
+    private fun amazonSqsFactory() =  SQSConnectionFactory(
+        ProviderConfiguration(),
+        amazonSQSBuilder()
+    )
 
     private fun amazonSQSBuilder(): AmazonSQS {
         val serviceEndpoint = environment.serviceEndpoint
@@ -66,5 +44,10 @@ class SqsConfigQueue(
             .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(serviceEndpoint, signingRegion))
             .withCredentials(AWSStaticCredentialsProvider(credentials))
             .build()
+    }
+
+    companion object {
+
+        val logger = LoggerFactory.getLogger(this.javaClass)
     }
 }

@@ -51,7 +51,8 @@ dependencies {
             'com.amazonaws:aws-java-sdk-sqs:1.11.697',
             'com.amazonaws:amazon-sqs-java-messaging-lib:1.0.8',
             'ch.qos.logback:logback-classic:1.2.3',
-            "com.natpryce:konfig:1.6.10.0"
+            'com.natpryce:konfig:1.6.10.0',
+            'com.rabbitmq.jms:rabbitmq-jms:1.14.0'
     )
     
     testImplementation ('org.junit.jupiter:junit-jupiter:5.4.2',
@@ -59,6 +60,7 @@ dependencies {
             'io.mockk:mockk:1.9',
             "org.testcontainers:junit-jupiter:1.12.5",
             "org.testcontainers:localstack:1.12.5",
+            "org.testcontainers:rabbitmq:1.12.5"
     )
 }
 

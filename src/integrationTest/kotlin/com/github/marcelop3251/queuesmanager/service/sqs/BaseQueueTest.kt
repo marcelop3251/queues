@@ -2,6 +2,8 @@ package com.github.marcelop3251.queuesmanager.service.sqs
 
 import java.util.*
 
+const val QUEUE_NAME = "queue"
+
 open class BaseQueueTest {
 
     fun getPropertiesFromEnvironment(): MutableMap<String, String> {

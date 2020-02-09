@@ -5,8 +5,8 @@ import com.natpryce.konfig.EnvironmentVariables
 import com.natpryce.konfig.getValue
 import com.natpryce.konfig.stringType
 
-data class EnvironmentConfig(
-    private val configuration: Configuration = EnvironmentVariables()
+class EnvironmentConfigSqs(
+    configuration: Configuration = EnvironmentSingleton.configuration
 ) {
 
     val awsAcessKeyId = configuration[AWS_ACCESS_KEY_ID]
